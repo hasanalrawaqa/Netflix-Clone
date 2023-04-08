@@ -1,14 +1,14 @@
 import React from 'react';
-import ModalMovie from '../ModalMovie/ModalMovie';
+import ModalMovie from '../ModalMovie/ModalMovie ';
 
 const Movie = (props) => {
   const movie = props.movie;
   return (
-    <div className="movie-card">
+    <div className="movie_card ">
       <img src={movie.poster_path} alt={movie.title} />
-      <div className="movie-description">
+      <div className="movie-description ">
         <h2>{movie.title}</h2>
-        <p>{movie.overview}</p>
+        <p>{movie.overview} </p>
         <ModalMovie movie={movie} />
       </div>
     </div>
