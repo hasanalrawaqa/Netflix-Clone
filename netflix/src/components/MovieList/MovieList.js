@@ -2,11 +2,12 @@ import React from 'react';
 import Movie from '../Movie/Movie';
 
 const MovieList = (props) => {
+  const { data } = props;
   return (
     <div>
-      {props.movieList.map((movie) => {
-        return <Movie key={movie.id} movie={movie} />;
-      })}
+      {data.map((movie) => (
+        <Movie key={movie.id} movie={movie}  />
+      ))}
     </div>
   );
 };

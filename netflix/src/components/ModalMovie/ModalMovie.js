@@ -1,33 +1,44 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useRef } from 'react';
+import { Button, Modal, Form } from 'react-bootstrap/';
 
-const ModalMovie = (props) => {
-  const [comment, setComment] = useState('');
-  const addMovie = () => {
-    axios
-      .post('/addMovie', {
-        title: props.movie.title,
-        poster_path: props.movie.poster_path,
-        comment: comment,
-      })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+function ModalMovie(props) {
+
+  const commentRef = useRef();
+  function handleCaption(j) {
+    j.preventDefault()
+    const userCaption = commentRef.current.value;
+    const newData = { ...props.movie, userCaption };
+    props.addComment(newData, props.movie.id);
+
+  }
+
+
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Add comment"
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-      />
-      <button onClick={addMovie}>Add to Favorite</button>
-    </div>
-  );
-};
+    <>
+      <Modal show={props.show} onHide={() => { props.handleColse() }}>
+        <Modal.Header closeButton>
+          <Modal.Title>{props.movie.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <img width='100%' src={props.movie.poster_path} alt={props.movie.title} />
+          <p>{props.movie.topText ? props.movie.topText : "No Text Provided"}</p>
+          <p>{props.movie.caption}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Label>Captions:</Form.Label>
+            <Form.Control ref={commentRef} type="textarea" placeholder={props.movie.caption ? props.movie.caption : "Add Your Caption Here..."} />
+          </Form.Group>
+          <Button className="addBtn" variant="primary" type="submit" onClick={handleCaption}  >
+            Add a Caption
+          </Button>
+          <Button variant="secondary" onClick={props.handleColse}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  )
+}
 
 export default ModalMovie;

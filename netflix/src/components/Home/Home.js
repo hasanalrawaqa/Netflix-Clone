@@ -1,22 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MovieList from '../MovieList/MovieList';
-import axios from 'axios';
 
 const Home = () => {
-  const [movieList, setMovieList] = useState([]);
-  useEffect(() => {
-    axios
-      .get('/trending')
-      .then((response) => {
-        setMovieList(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  async function getdata() {
+    await fetch('https://movies-20iz.onrender.com/trending')
+    .then((response) => response.json())
+    .then((data) => {
+        setData(data);
+        setLoading(false);
       });
-  }, []);
+  }
+
+  useEffect(() => { getdata()},[]);
+
+
   return (
     <div>
-      <MovieList movieList={movieList} />
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div>
+          <MovieList data={data} />
+        </div>
+      )}
     </div>
   );
 };
