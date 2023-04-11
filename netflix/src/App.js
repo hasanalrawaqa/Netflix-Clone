@@ -1,11 +1,13 @@
 import React from 'react';
 import Home from './components/Home/Home';
-
+import { Routes, Route } from 'react-router-dom';
 function App() {
   return (
-    <div className="App">
-      <Home />
-    </div>
+    <>
+      <Routes>
+        <Route path="/trending" component={<Home />} />
+      </Routes>
+    </>
   );
 }
 
