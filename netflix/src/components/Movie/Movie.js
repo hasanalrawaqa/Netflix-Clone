@@ -1,5 +1,4 @@
 
-import React from "react";
 import { Card, Button } from "react-bootstrap";
 
 import ModalMovie from '../ModalMovie/ModalMovie ';
@@ -13,7 +12,7 @@ function Movie(props) {
           <Card.Body>
             <Card.Title>{props.movie.title}</Card.Title>
             <Card.Text>
-              {props.movie.overview}
+              {props.movie.release_date}
             </Card.Text>
             <Card.Text>
               {props.movie.Caption}

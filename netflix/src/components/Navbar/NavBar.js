@@ -8,6 +8,7 @@ const  NavBar =()=>{
                 <Navbar.Brand href="/">Navbar</Navbar.Brand>
                 <Nav className="me-auto">
                     <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link href="/favlist">Favlist</Nav.Link>
                 </Nav>
             </Container>
         </Navbar>

@@ -1,15 +1,28 @@
-import React from 'react';
-import Movie from '../Movie/Movie';
+import { useState } from 'react'
+import { CardGroup } from 'react-bootstrap';
+import ModalMovie from '../ModalMovie/ModalMovie.js'
+import Movie from '../Movie/Movie.js'
 
-const MovieList = (props) => {
-  const { data } = props;
+function MovieList(props) {
+  const [showModal, setShowModal] = useState(false);
+  const [movie, setMovie] = useState();
   return (
-    <div>
-      {data.map((movie) => (
-        <Movie key={movie.id} movie={movie}  />
-      ))}
-    </div>
-  );
-};
+    <>
+      <CardGroup>
+        {
+          props.movies.map((movie) => {
+            return <div key={movie.id}>
+              <Movie movie={movie} key={movie.id} setShowModal={setShowModal} setMovie={setMovie} />
+            </div>
+          })
+        }
+      </CardGroup>
+      {showModal && <ModalMovie show={showModal} movie={movie}
+        handleColse={() => { setShowModal(false) }}
+        addComment={props.addComment} />}
+
+    </>
+  )
+}
 
 export default MovieList;
