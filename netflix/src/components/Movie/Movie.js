@@ -1,8 +1,10 @@
+
 import { Card, Button } from "react-bootstrap";
 
-
+import ModalMovie from '../ModalMovie/ModalMovie ';
 function Movie(props) {
   return (
+
     <div>
       <div key={props.movie.id}>
         <Card key={props.movie.id}>
@@ -26,6 +28,7 @@ function Movie(props) {
             </Button>
           </Card.Body>
         </Card>
+ 
       </div>
     </div>
   );
